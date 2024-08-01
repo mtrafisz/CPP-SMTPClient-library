@@ -264,12 +264,14 @@ install(DIRECTORY src/ DESTINATION include/smtpclient
     FILES_MATCHING PATTERN "*.h")
 
 # Uninstall target
+if (NOT TARGET uninstall)
 CONFIGURE_FILE(
     "${CMAKE_CURRENT_SOURCE_DIR}/cmake/CMakeUninstall.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/cmake/CMakeUninstall.cmake"
     IMMEDIATE @ONLY)
 ADD_CUSTOM_TARGET(uninstall
     "${CMAKE_COMMAND}" -P "${CMAKE_CURRENT_BINARY_DIR}/cmake/CMakeUninstall.cmake")
+endif()
 
 if(EXISTS ${PROJECT_PATH}/simpleclient AND IS_DIRECTORY ${PROJECT_PATH}/simpleclient)
     add_subdirectory(${PROJECT_PATH}/simpleclient)
